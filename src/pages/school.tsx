@@ -34,7 +34,7 @@ import Player from "skatemap_new/components/player/Player";
                 <div className="flex flex-col items-center m-5">
                 <div className="flex w-[90%] h-[500px] flex-row items-center border-2 border-black rounded-3xl p-5">
                   <button className="w-full h-[450px] m-3 text-xl rounded-3xl hover:bg-red-100">Отклонить</button>
-                  <div className="flex flex-col w-full items-center m-0">
+                  <div className="flex flex-row h-[450px] w-full items-center m-0">
                     <Player src={item.video}/>
                   </div>
                   <button className="w-full h-[450px] hover:bg-green-100 rounded-3xl m-3 text-xl">Принять</button>
