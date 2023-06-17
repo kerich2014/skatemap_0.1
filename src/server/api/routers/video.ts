@@ -16,8 +16,29 @@ export const videoRouter = createTRPCRouter({
     }),
 
   getAll: publicProcedure.query(async ({ ctx }) => {
-    const result = await ctx.prisma.videos.findMany()
+    const result = await ctx.prisma.videos.findMany({
+      where: {
+        accept: null
+      }
+    })
     return result
+  }),
+
+  changeAccept: publicProcedure
+  .input(z.object({
+    id: z.number(),
+    accept: z.boolean(),
+  }))
+  .mutation(async ({ctx, input}) => {
+    let {id, accept} = input
+    return ctx.prisma.videos.update({
+      where: {
+        id,
+      },
+      data: {
+        accept,
+      }
+    })
   }),
 
   sendVideo: publicProcedure.input(z.object({

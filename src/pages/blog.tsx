@@ -180,7 +180,7 @@ const uploadImage = async ({ imageFile }: Image) => {
                       <div className="text-center">{blog.data[index]!.description}</div>
                       </div>
                     </Modal>
-                    <div key={i} onClick={() => {setIndex(i), setModalActive2(true)}} className="flex flex-row items-center border-2 p-3 w-[80%] min-h-[350px] m-5 border-gray-800 rounded-3xl cursor-pointer">
+                    <div onClick={() => {setIndex(i), setModalActive2(true)}} className="flex flex-row items-center border-2 p-3 w-[80%] min-h-[350px] m-5 border-gray-800 rounded-3xl cursor-pointer">
                       <div className="flex flex-col items-center h-72 w-[50%]">
                         <img className="h-72 rounded-xl" src={item.photo}></img>
                       </div>
