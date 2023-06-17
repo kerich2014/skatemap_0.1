@@ -1,4 +1,3 @@
-// Player.tsx
 import { Button, Flex, Spinner } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import React, { useEffect, useRef, useState } from "react";
@@ -53,6 +52,15 @@ const Player = (props: Props) => {
     };
 
     const element = videoRef.current;
+
+    element.addEventListener("progress", function () {
+      if (!element.buffered) return;
+      const bufferedEnd = element.buffered.end(element.buffered.length - 1);
+      const duration = element.duration;
+      if (bufferRef && duration > 0) {
+        bufferRef.current!.style.width = (bufferedEnd / duration) * 100 + "%";
+      }
+    });
 
     element.addEventListener("timeupdate", function () {
       setIsWaiting(false);
@@ -162,7 +170,7 @@ const Player = (props: Props) => {
           >
             <Flex pos="relative" w="full" h="full">
               <Flex
-                h="200px"
+                h="full"
                 className="play-progress"
                 bg="#0CAADC"
                 zIndex={1}
@@ -170,7 +178,7 @@ const Player = (props: Props) => {
               />
               <Flex
                 pos="absolute"
-                h="200px"
+                h="full"
                 className="buffer-progress"
                 bg="#FDFFFC"
                 ref={bufferRef}
@@ -199,6 +207,10 @@ const Player = (props: Props) => {
                 {!isPlaying ? <PlayIcon /> : <PauseIcon />}
               </Button>
 
+              <ElapsedTimeTracker
+                totalSec={durationSec}
+                elapsedSec={elapsedSec}
+              />
             </Flex>
 
             <PlaybackRate
