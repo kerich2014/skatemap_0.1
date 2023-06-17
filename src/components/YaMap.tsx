@@ -117,7 +117,7 @@ export default function YaMap({points}: pointsType ) {
               }}
               onClick={() => {deletePointFunc()}}
             />)}
-            <SearchControl/>  
+            <SearchControl options={{float: "left"}}/>  
         </Map>
       </div>
     </YMaps>

@@ -97,7 +97,7 @@ export default function MapForm() {
           state={mapState}
           style={mapStyle}
         >
-          <SearchControl/>
+          <SearchControl options={{float: "left"}}/>
         </Map>
         
       </YMaps>
