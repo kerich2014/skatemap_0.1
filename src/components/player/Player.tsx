@@ -53,15 +53,6 @@ const Player = (props: Props) => {
 
     const element = videoRef.current;
 
-    element.addEventListener("progress", function () {
-      if (!element.buffered) return;
-      const bufferedEnd = element.buffered.end(element.buffered.length - 1);
-      const duration = element.duration;
-      if (bufferRef && duration > 0) {
-        bufferRef.current!.style.width = (bufferedEnd / duration) * 100 + "%";
-      }
-    });
-
     element.addEventListener("timeupdate", function () {
       setIsWaiting(false);
       const duration = element.duration;
