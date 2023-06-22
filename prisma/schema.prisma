@@ -59,6 +59,7 @@ model User {
   lvl           Int?      @default(1)
   blog          Blog[]
   video         Videos[]
+  tricks        UsersTricks[]
 }
 
 model Role {
@@ -101,4 +102,28 @@ model Videos {
   user        User?     @relation(fields: [userId], references: [id])
 }
 
+model Tricks {
+  id          Int    @id @default(autoincrement())
+  video       String
+  name        String
+  description String
+  tutor       String
+  typeTrickId Int?
+  hard        Int?
+  typeTrick   TypeTricks? @relation(fields: [typeTrickId], references: [id])
+  users       UsersTricks[]
+}
 
+model TypeTricks {
+  id          Int    @id @default(autoincrement())
+  name        String
+  tricks      Tricks[]
+}
+
+model UsersTricks {
+  users       User      @relation(fields: [userId], references: [id])
+  userId      String
+  tricks      Tricks    @relation(fields: [trickId], references: [id])
+  trickId     Int
+  @@id([userId, trickId])
+}

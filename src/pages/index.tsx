@@ -145,7 +145,7 @@ return (
         </main> */}
       <div className="flex flex-grow">
         <h1 className="m-auto mt-[2%] text-5xl cursor-default">Skate Map</h1>
-        {session?.user && (<Link className="absolute top-[3%] right-[2%] border-2 h-12 w-12 border-gray-800 rounded-full m-auto" href={`/profiles/${session?.user.id}`}><img className="rounded-full h-11" src={session.user.image!}></img></Link>)}
+        {session?.user && (<Link className="absolute top-[3%] right-[2%] border-2 h-12 w-12 border-gray-800 rounded-full m-auto" href={`/profiles/${session?.user.id}`}><img className="rounded-full h-11" src={user.data?.image!}></img></Link>)}
         <AuthShowcase />
       </div>
       <nav className="flex items-center m-[2%]">

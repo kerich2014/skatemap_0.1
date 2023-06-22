@@ -95,7 +95,7 @@ const uploadImage = async ({ imageFile }: Image) => {
         title: name.toString(),
         description: description.toString(),
         photo: imageUrl,
-        userId: user.data?.email!
+        userId: user.data?.id!
       })
   
       setName('');
@@ -112,7 +112,7 @@ const uploadImage = async ({ imageFile }: Image) => {
       <>
         <div className="flex flex-grow">
           <Link className="m-auto mt-[2%] text-5xl" href = {`/`}>Skate Map</Link>
-          {session?.user && (<Link className="absolute top-[3%] right-[2%] border-2 h-12 w-12 border-gray-800 rounded-full m-auto" href={`/profiles/${session?.user.id}`}><img className="rounded-full h-11" src={session.user.image!}></img></Link>)}
+          {session?.user && (<Link className="absolute top-[3%] right-[2%] border-2 h-12 w-12 border-gray-800 rounded-full m-auto" href={`/profiles/${session?.user.id}`}><img className="rounded-full h-11" src={user.data?.image!}></img></Link>)}
         </div>
         <nav className="flex items-center m-[2%]">
             <Link className="a" href = {`/`}>Карта спотов</Link>

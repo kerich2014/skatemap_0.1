@@ -5,6 +5,8 @@ import { userRouter } from "./routers/user";
 import { blogRouter } from "./routers/blog";
 import { videoRouter } from "./routers/video";
 import { authRouter } from "./routers/auth";
+import { userTrickRouter } from "./routers/userTrick";
+import { tricksRouter } from "./routers/tricks";
 
 /**
  * This is the primary router for your server.
@@ -18,6 +20,8 @@ export const appRouter = createTRPCRouter({
   blog: blogRouter,
   video: videoRouter,
   auth: authRouter,
+  trick: tricksRouter,
+  userTrick: userTrickRouter,
 });
 
 // export type definition of API

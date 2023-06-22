@@ -56,6 +56,20 @@ export const userRouter = createTRPCRouter({
          })
       }),
 
+      getTricks: publicProcedure.input(z.object({id: z.string()})).query(async({
+        input, ctx}) => {
+            const {id} = input
+            const user = await ctx.prisma.user.findUnique({
+              where: {
+                id
+              },
+              include: {
+                tricks: true, 
+              },
+              })
+              return user
+        }),
+
       uploadImage: publicProcedure.input(z.object({
         id: z.string(),
         image: z.string(),

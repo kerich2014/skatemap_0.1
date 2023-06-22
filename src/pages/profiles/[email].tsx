@@ -33,7 +33,7 @@ type Image = {
 // });
 
 
-const ProfilePage: NextPage<InferGetStaticPropsType <typeof getStaticProps>> = (id) => {
+const ProfilePage: NextPage<InferGetStaticPropsType <typeof getStaticProps>> = () => {
 
   const session = useSession()
   const {data: user, refetch} = api.user.getById.useQuery({email: session.data?.user!.email!})
@@ -207,7 +207,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 export async function getStaticProps(context: GetStaticPropsContext<{email: string}>) {
   const email = context.params?.email
-  if(email == null){
+  if(email == null || email == undefined){
     return{
       redirect: {
         destination: "/"
