@@ -142,14 +142,14 @@ const ProfilePage: NextPage<InferGetStaticPropsType <typeof getStaticProps>> = (
     return(
         <>
          <div className="flex flex-grow">
-        <h1 className="m-auto mt-[2%] text-5xl cursor-default">Skate Map</h1>
+         <Link className="m-auto mt-[2%] text-5xl" href = {`/`}>Skate Map</Link>
         {user == null && (<AuthShowcase/>)}
       </div>
       <nav className="flex items-center m-[2%]">
           <Link className="a" href = {`/`}>Карта спотов</Link>
           {user != null && (<Link className="a" href = {`/school`}>Школа трюков</Link>)}
           {user != null && (<a className="a">Блог</a>)}
-          <a className="a">Правила скейтпарков</a>
+          <Link className="a" href = {`/rules`}>Правила скейтпарков</Link>
       </nav>
 
       <div className="flex flex-row m-auto w-[80%] items-center">

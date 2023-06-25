@@ -38,17 +38,34 @@ import Player from "skatemap_new/components/player/Player";
     mutateSend({userId: userId, trickId: trickId})
   }
 
+  const AuthShowcase: React.FC = () => {
+    const { data: sessionData } = useSession();
+  
+    return (
+      <Link href="/signup">
+
+        <button
+          className="absolute top-[4%] right-[7%] border-2 border-white rounded-full bg-white/10 px-10 py-3 no-underline transition hover:border-black"
+          
+        >
+          {sessionData ? "Выйти" : "Войти"}
+        </button>
+        </Link>
+    );
+  }
+
     return (
       <>
         <div className="flex flex-grow">
           <Link className="m-auto mt-[2%] text-5xl" href = {`/`}>Skate Map</Link>
           {session?.user && (<Link className="absolute top-[3%] right-[2%] border-2 h-12 w-12 border-gray-800 rounded-full m-auto" href={`/profiles/${session?.user.id}`}><img className="rounded-full h-11" src={user.data?.image!}></img></Link>)}
+          <AuthShowcase />
         </div>
         <nav className="flex items-center m-[2%]">
             <Link className="a" href = {`/`}>Карта спотов</Link>
             <Link className="a" href = {`/school`}>Школа трюков</Link>
             <Link className="a" href = {`/blog`}>Блог</Link>
-            <a className="a">Правила скейтпарков</a>
+            <Link className="a" href = {`/rules`}>Правила скейтпарков</Link>
         </nav>
         {(user.data?.role == 'expert' || user.data?.role == 'admin') && (<button className='addState' onClick={() => {setModalActive(true)}}>Патруль</button>)}
         <div>

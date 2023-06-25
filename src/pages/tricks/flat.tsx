@@ -146,7 +146,7 @@ const Flat: NextPage = () => {
           <Modal active={modalActive} setActive={setModalActive}>
             <div className="flex flex-col items-center h-[550px] overflow-hidden overflow-y-scroll">
               <h1 className=" text-3xl mb-5 font-bold">{flat?.[index]!.name}</h1>
-              <div className="w-[500px]">
+              <div className="max-w-[60%]">
                     <Player src={flat?.[index]!.video}/>
               </div>
               <div className="m-5 text-left">{flat?.[index]!.tutor}</div>

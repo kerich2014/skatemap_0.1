@@ -152,7 +152,7 @@ return (
           <Link className="a" href = {`/`}>Карта спотов</Link>
           {session?.user && (<Link className="a" href = {`/school`}>Школа трюков</Link>)}
           {session?.user && (<Link className="a" href = {`/blog`}>Блог</Link>)}
-          <a className="a">Правила скейтпарков</a>
+          <Link className="a" href = {`/rules`}>Правила скейтпарков</Link>
       </nav>
       <div className="w-[96%] m-auto">
       {(user.data?.role == 'admin' || user.data?.role == 'expert') && (<button className='addSpot' onClick={() => setModalActive(true)}>Добавить спот</button>)}
