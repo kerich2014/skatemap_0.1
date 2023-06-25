@@ -22,6 +22,8 @@ export const tricksRouter = createTRPCRouter({
     return result
   }),
 
+  
+
 
   changeAccept: publicProcedure
   .input(z.object({

@@ -18,10 +18,24 @@ import Player from "skatemap_new/components/player/Player";
   const {mutate} = api.video.changeAccept.useMutation()
   const [accept, setAccept] = useState(true)
   const [videoId, setVideoId] = useState(-1)
+  const {mutate: mutateLvl} = api.user.updateLvl.useMutation()
+  const [userId, setUserId] = useState<string>('')
+  const userLvl = api.user.getLvl.useQuery({id: userId})
+  const {mutate: mutateSend} = api.userTrick.sendNode.useMutation()
+  const [trickId, setTrickId] = useState<number>(0)
 
   const acceptVideo = () => {
     
       mutate({id: videoId, accept: accept})
+  }
+
+  const updateLvl = () => {
+    let lvl = userLvl.data?.lvl! + 5
+    mutateLvl({id: userId, lvl: lvl})
+  }
+
+  const sendData = () => {
+    mutateSend({userId: userId, trickId: trickId})
   }
 
     return (
@@ -42,7 +56,7 @@ import Player from "skatemap_new/components/player/Player";
           <div className="h-[600px] overflow-hidden overflow-y-scroll">
             {videos?.map((item) => (
                 <div className="flex flex-col items-center m-5">
-                <div className="flex w-[90%] h-[500px] flex-row items-center border-2 border-black rounded-3xl p-5" onMouseUp={() => {setVideoId(item.id), console.log(accept, videoId)}}>
+                <div className="flex w-[90%] h-[500px] flex-row items-center border-2 border-black rounded-3xl p-5" onMouseUp={() => {setVideoId(item.id), setTrickId(item.trickId as number), setUserId(item.userId as string)}}>
                   <button className="w-full h-[450px] m-3 text-xl rounded-3xl hover:bg-red-100" onClick={
                     () => {
                       setVideoId(item.id),
@@ -65,6 +79,8 @@ import Player from "skatemap_new/components/player/Player";
                       setVideoId(item.id),
                       setAccept(true),
                       acceptVideo(),
+                      updateLvl(),
+                      sendData(),
                       refetch();
                       alert('Видео одобрено')
                     }

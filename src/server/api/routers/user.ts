@@ -30,6 +30,19 @@ export const userRouter = createTRPCRouter({
             }
     }),
 
+    getLvl: publicProcedure.input(z.object({id: z.string()})).query(async({
+      input, ctx}) => {
+          const {id} = input
+          if(id == "") return null
+          const user = await ctx.prisma.user.findUnique({where: {id}, select: 
+              {id: true, lvl: true}})
+              if(user == null) return
+              return{
+                  id: user.id,
+                  lvl: user.lvl,
+              }
+      }),
+
     uploadData: publicProcedure.input(z.object({
         id: z.string(),
         image: z.string(),
@@ -73,6 +86,22 @@ export const userRouter = createTRPCRouter({
               },
               })
               return user?.tricks
+        }),
+
+        updateLvl: publicProcedure.input(z.object({
+          id: z.string(),
+          lvl: z.number(),
+          })).mutation(async ({ ctx, input}) => {
+            let {id, lvl} = input
+  
+           return ctx.prisma.user.update({
+              where: {
+                  id,
+              },
+              data: {
+                  lvl,
+              },
+           })
         }),
 
       uploadImage: publicProcedure.input(z.object({
