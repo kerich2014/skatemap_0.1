@@ -99,6 +99,8 @@ model Videos {
   video       String
   accept      Boolean?
   userId      String?
+  trickId     Int?
+  trick       Tricks?   @relation(fields: [trickId], references: [id])
   user        User?     @relation(fields: [userId], references: [id])
 }
 
@@ -112,6 +114,7 @@ model Tricks {
   hard        Int?
   typeTrick   TypeTricks? @relation(fields: [typeTrickId], references: [id])
   users       UsersTricks[]
+  videos      Videos[]
 }
 
 model TypeTricks {

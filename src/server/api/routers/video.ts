@@ -24,6 +24,18 @@ export const videoRouter = createTRPCRouter({
     return result
   }),
 
+  sendVideo: publicProcedure.input(z.object({
+    userId: z.string(),
+    video: z.string(),
+    trickId: z.number(),
+    })).mutation(async ({ ctx, input }) => {
+     const {userId, video, trickId} = input 
+      
+      const result = await ctx.prisma.videos.create({data: {userId, video, trickId}})
+      
+      return result
+  }),
+
   changeAccept: publicProcedure
   .input(z.object({
     id: z.number(),
@@ -39,16 +51,6 @@ export const videoRouter = createTRPCRouter({
         accept,
       }
     })
-  }),
-
-  sendVideo: publicProcedure.input(z.object({
-    video: z.string(),
-    })).mutation(async ({ ctx, input }) => {
-     const {video} = input 
-      
-      const result = await ctx.prisma.videos.create({data: {video}})
-      
-      return result
   }),
 
   deleteVideo: publicProcedure
