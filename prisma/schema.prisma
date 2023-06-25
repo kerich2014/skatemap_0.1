@@ -107,7 +107,7 @@ model Tricks {
   video       String
   name        String
   description String
-  tutor       String
+  tutor       String  @db.LongText
   typeTrickId Int?
   hard        Int?
   typeTrick   TypeTricks? @relation(fields: [typeTrickId], references: [id])

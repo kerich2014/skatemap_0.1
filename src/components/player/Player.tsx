@@ -131,7 +131,7 @@ const Player = (props: Props) => {
       />
       <Flex
         w="full"
-        h="100px"
+        h="full"
         bg="linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5))"
         pos="absolute"
         opacity={0}

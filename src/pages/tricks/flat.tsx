@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { api } from "skatemap_new/utils/api";
+import Modal from "skatemap_new/components/modal/Modal";
+import Player from "skatemap_new/components/player/Player";
 
 interface MyObject {
   userId: string;
@@ -15,6 +17,8 @@ const Flat: NextPage = () => {
   const user = api.user.getById.useQuery({ email: email as string });
   const { data: tricks } = api.user.getTricks.useQuery({ id: user.data?.id! });
   const { data: flat } = api.trick.getFlat.useQuery();
+  const [modalActive, setModalActive] = useState(false)
+  const [index, setIndex] = useState<number>(0)
 
   const checkArray = (arr: MyObject[], search: MyObject) => {
     for (let i = 0; i < arr.length; i++) {
@@ -58,9 +62,20 @@ const Flat: NextPage = () => {
       </nav>
       <div className="flex flex-col items-center m-auto">
         {flat?.map((item, i) => (
+          <>
+          <Modal active={modalActive} setActive={setModalActive}>
+            <div className="flex flex-col items-center h-[550px] overflow-hidden overflow-y-scroll">
+              <h1 className=" text-2xl font-bold">{flat?.[index]!.name}</h1>
+              <div className="w-[500px]">
+                    <Player src={flat?.[index]!.video}/>
+              </div>
+              <div className="m-5 text-left">{flat?.[index]!.tutor}</div>
+            </div>
+          </Modal>
           <div
             key={item.id}
-            className="flex flex-row items-center m-5 w-[80%] h-[150px] border-2 border-black rounded-3xl"
+            className="flex flex-row items-center m-5 w-[80%] h-[150px] border-2 border-black rounded-3xl cursor-pointer"
+            onClick={() => {setIndex(i), setModalActive(true)}}
           >
             <div className="flex w-[70%] flex-col m-5 items-center">
               <h1 className="text-center text-2xl">{item.name}</h1>
@@ -86,6 +101,7 @@ const Flat: NextPage = () => {
               (<div className="border-2 w-10 h-10 m-5 border-black rounded-full border-dashed"></div>)}
             </div>
           </div>
+          </>
         ))}
       </div>
     </>
