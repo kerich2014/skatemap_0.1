@@ -87,7 +87,7 @@ model Placemarks {
 model Blog {
   id          String     @id @default(cuid())
   title       String
-  description String
+  description String     @db.LongText
   photo       String
   userId      String?
   date        DateTime @default(now())

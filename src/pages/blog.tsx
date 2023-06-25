@@ -80,7 +80,7 @@ const uploadImage = async ({ imageFile }: Image) => {
   
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     accept: {
-      "image/png": [".png", ".jpg", ".jpeg"],
+      "image/png": [".png", ".jpg", ".jpeg", ".webp"],
     },
     maxFiles: 1,
     noClick: true,
